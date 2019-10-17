@@ -1,5 +1,5 @@
 package com.socu.enpit.sssforshop
-
+//Tasaka
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
