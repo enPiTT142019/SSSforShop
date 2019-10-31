@@ -8,6 +8,7 @@ import android.transition.*
 import android.view.Window
 import kotlinx.android.synthetic.main.activity_sub.*
 import android.view.Gravity
+import kotlinx.android.synthetic.main.fragment_request.*
 import android.view.Menu
 import android.view.MenuItem
 
@@ -25,7 +26,7 @@ class SubActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sub)
 
         // SubActivity起動後（ログイン後）すぐは空の画面が表示されるので、EditFragmentの画面を表示させる
-        this.supportFragmentManager.beginTransaction().replace(R.id.container, EditFragment()).commit()
+        this.supportFragmentManager.beginTransaction().replace(R.id.requestContainer, EditFragment()).commit()
 
         // 「店舗情報の編集」ボタンを押したときの処理
         editButton.setOnClickListener {
@@ -44,7 +45,7 @@ class SubActivity : AppCompatActivity() {
                 fragment.exitTransition = set
             }
             // EditFragmentを表示させる
-            this.supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+            this.supportFragmentManager.beginTransaction().replace(R.id.requestContainer, fragment).commit()
         }
 
         // 「お客様のご意見」ボタンを押したときの処理
