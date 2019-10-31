@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         // ログインボタンを押したときの処理
         loginButton.setOnClickListener {
             // 画面遷移するにはまず「Intent」を用意する
-            val intent = Intent(this, SubActivity::class.java)
+            val intent = Intent(this, EditActivity::class.java)
             // 画面遷移した後に、バックキーでこの画面に戻って来れないようにする。
             // 画面遷移してきた順番は、スタックに保存されていく仕組みになっており、例えば
             // A → B → C → A → C と画面遷移した場合、バックキーを押すと
