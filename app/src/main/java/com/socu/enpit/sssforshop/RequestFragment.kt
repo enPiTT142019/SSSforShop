@@ -20,26 +20,26 @@ class RequestFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        YoubouButton.setOnClickListener {
-            val fragment = YoubouFragment()
-            val fragmentManager = this.childFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            getChildFragmentManager().beginTransaction().add(R.id.container,fragment).commit()
-        }
+//        YoubouButton.setOnClickListener {
+//            val fragment = YoubouFragment()
+//            val fragmentManager = this.childFragmentManager
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            getChildFragmentManager().beginTransaction().add(R.id.container,fragment).commit()
+//        }
 
-        //view!!.KaizenButton.setOnClickListener{
-            //val fragment = KaizenFragment()
-            //val fragmentManager = this.childFragmentManager
-            //val fragmentTransaction = fragmentManager.beginTransaction()
-            //fragmentTransaction.replace(R.id.requestContainer,fragment).commit()
-        //}
-
-       //view!!.KansouButton.setOnClickListener{
-            //val fragment = KansouFragment()
-            //val fragmentManager = this.childFragmentManager
-            //val fragmentTransaction = fragmentManager.beginTransaction()
-            //fragmentTransaction.replace(R.id.requestContainer,fragment).commit()
-        //}
+//        view!!.KaizenButton.setOnClickListener{
+//            val fragment = KaizenFragment()
+//            val fragmentManager = this.childFragmentManager
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.requestContainer,fragment).commit()
+//        }
+//
+//       view!!.KansouButton.setOnClickListener{
+//            val fragment = KansouFragment()
+//            val fragmentManager = this.childFragmentManager
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.requestContainer,fragment).commit()
+//        }
     }
 }
 
