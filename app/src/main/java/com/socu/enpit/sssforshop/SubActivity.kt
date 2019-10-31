@@ -71,8 +71,7 @@ class SubActivity : AppCompatActivity() {
 
     // メニューを選択したときの動作をここに書く
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val itemId = item?.itemId
-        when (itemId) {
+        when (item?.itemId) {
             // メニューの「ログアウト」を押したとき
             R.id.menu_logout -> {
                 // MainActivity（ログイン画面）に遷移する
