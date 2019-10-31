@@ -9,7 +9,10 @@ import android.view.Window
 import kotlinx.android.synthetic.main.activity_sub.*
 import android.view.Gravity
 import kotlinx.android.synthetic.main.fragment_request.*
- class SubActivity : AppCompatActivity() {
+import android.view.Menu
+import android.view.MenuItem
+
+class SubActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,12 +61,27 @@ import kotlinx.android.synthetic.main.fragment_request.*
             }
             this.supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
         }
+    }
 
-        // 「ログアウト」ボタンを押したときの処理
-        logoutButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+    // メニューを表示させる処理
+    // この関数をオーバーライドして「menu.xml」を指定することで表示される
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    // メニューを選択したときの動作をここに書く
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val itemId = item?.itemId
+        when (itemId) {
+            // メニューの「ログアウト」を押したとき
+            R.id.menu_logout -> {
+                // MainActivity（ログイン画面）に遷移する
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
         }
+        return super.onOptionsItemSelected(item)
     }
 }
