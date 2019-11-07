@@ -6,16 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".EditActivity">
 
-    <TextView
-        android:id="@+id/EditActivityView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="EditActivityScene"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:textStyle="bold"
+    <ScrollView
+        android:id="@+id/edit_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/shopNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="パパパン屋"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/shopImage"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:srcCompat="@drawable/shoppicture" />
+
+            <Button
+                android:id="@+id/editImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:text="店の写真を編集"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/newsText"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:text="新メニューを更新しました。"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/editNewsButton"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:text="ニュースを編集"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/menuText"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:text="アンパパパン"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/editMenuButton"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:text="商品情報を編集"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/requestButton"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:text="意見を見る"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
