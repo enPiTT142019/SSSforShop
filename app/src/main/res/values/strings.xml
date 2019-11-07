@@ -12,4 +12,7 @@
     <string name="enter_your_name_here">名前を入力</string>
     <string name="enter_your_password_here">パスワードを入力</string>
     <string name="logout">ログアウト</string>
+    <string name="create_account">アカウントの新規登録</string>
+    <string name="new_registration">新規登録</string>
+    <string name="to_login_screen">ログイン画面に戻る</string>
 </resources>

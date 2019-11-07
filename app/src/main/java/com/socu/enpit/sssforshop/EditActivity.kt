@@ -33,7 +33,7 @@ class EditActivity : AppCompatActivity() {
             // メニューの「ログアウト」を押したとき
             R.id.menu_logout -> {
                 // MainActivity（ログイン画面）に遷移する
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             }
