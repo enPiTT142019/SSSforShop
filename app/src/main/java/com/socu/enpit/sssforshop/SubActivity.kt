@@ -8,7 +8,6 @@ import android.transition.*
 import android.view.Window
 import kotlinx.android.synthetic.main.activity_sub.*
 import android.view.Gravity
-import kotlinx.android.synthetic.main.fragment_request.*
  class SubActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_request.*
         setContentView(R.layout.activity_sub)
 
         // SubActivity起動後（ログイン後）すぐは空の画面が表示されるので、EditFragmentの画面を表示させる
-        this.supportFragmentManager.beginTransaction().replace(R.id.requestContainer, EditFragment()).commit()
+        this.supportFragmentManager.beginTransaction().replace(R.id.container, EditFragment()).commit()
 
         // 「店舗情報の編集」ボタンを押したときの処理
         editButton.setOnClickListener {
@@ -42,9 +41,9 @@ import kotlinx.android.synthetic.main.fragment_request.*
                 fragment.exitTransition = set
             }
             // EditFragmentを表示させる
-            this.supportFragmentManager.beginTransaction().replace(R.id.requestContainer, fragment).commit()
+            this.supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
         }
-
+/*
         // 「お客様のご意見」ボタンを押したときの処理
         requestButton.setOnClickListener {
             val fragment = RequestFragment()
@@ -58,7 +57,7 @@ import kotlinx.android.synthetic.main.fragment_request.*
             }
             this.supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
         }
-
+*/
         // 「ログアウト」ボタンを押したときの処理
         logoutButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

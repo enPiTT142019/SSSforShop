@@ -1,3 +1,4 @@
+/*
 package com.socu.enpit.sssforshop
 
 
@@ -6,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.activity_request.*
 import kotlinx.android.synthetic.main.fragment_request.*
 import kotlinx.android.synthetic.main.fragment_request.view.*
 import kotlinx.android.synthetic.main.fragment_request.view.YoubouButton
@@ -43,3 +45,4 @@ class RequestFragment : Fragment() {
     }
 }
 
+*/
