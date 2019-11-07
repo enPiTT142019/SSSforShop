@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     tools:context=".EditActivity">
 
     <ScrollView
@@ -24,16 +26,18 @@
                 android:id="@+id/shopNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="パパパン屋"
+                android:background="#AAA1A1"
+                android:text="パパパパン屋"
                 android:textAlignment="center"
                 android:textAllCaps="false"
+                android:textColor="#000000"
                 android:textSize="36sp" />
 
             <ImageView
                 android:id="@+id/shopImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/shoppicture" />
+                app:srcCompat="@drawable/bread_panya" />
 
             <Button
                 android:id="@+id/editImageButton"
@@ -41,15 +45,16 @@
                 android:layout_height="wrap_content"
                 android:text="店の写真を編集"
                 android:textAlignment="center"
-                android:textSize="24sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/newsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFEB3B"
                 android:textAlignment="textStart"
-                android:textSize="24sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -58,21 +63,23 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="お知らせを入力してください"
-                android:inputType="textMultiLine|textPersonName" />
+                android:inputType="textMultiLine|textPersonName"
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/editNewsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ニュースを編集"
-                android:textSize="24sp" />
+                android:text="ニュースを更新"
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/menuText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#6AFF1A"
                 android:textAlignment="textStart"
-                android:textSize="24sp" />
+                android:textSize="30sp" />
 
             <EditText
                 android:id="@+id/menuEditText"
@@ -80,14 +87,15 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="商品情報を入力してください"
-                android:inputType="textMultiLine|textPersonName" />
+                android:inputType="textMultiLine|textPersonName"
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/editMenuButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="商品情報を編集"
-                android:textSize="24sp" />
+                android:text="商品情報を更新"
+                android:textSize="30sp" />
 
         </LinearLayout>
     </ScrollView>

@@ -1,14 +1,16 @@
 package com.socu.enpit.sssforshop
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.provider.Settings.Global.putString
+import android.os.ConditionVariable
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
-import androidx.core.content.edit
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity() {
@@ -16,8 +18,6 @@ class EditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
-
-
 
         requestButton.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
@@ -27,15 +27,17 @@ class EditActivity : AppCompatActivity() {
         editNewsButton.setOnClickListener {
             if(newsEditText != null){
                 newsText.text = newsEditText.text.toString()
+                val newsStrings: CharSequence = newsText.text
             }
         }
 
         editMenuButton.setOnClickListener {
             if(menuEditText != null){
                 menuText.text = menuEditText.text.toString()
+                val menuStrings: CharSequence = menuText.text
+                menuEditText.hint = "商品情報を入力してください"
             }
         }
-
     }
 
     // メニューを表示させる処理
@@ -58,5 +60,12 @@ class EditActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    // キーボード隠すやつ
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(editlayout.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        return super.dispatchTouchEvent(ev)
     }
 }
