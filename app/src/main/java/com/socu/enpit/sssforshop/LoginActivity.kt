@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, SignupActivity::class.java)
             startActivityForResult(intent, REQUEST_SIGNUP)
         }
+        debugButton.setOnClickListener { onLoginSuccess() }
     }
 
     fun login() {

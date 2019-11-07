@@ -14,4 +14,5 @@
     <string name="create_account">アカウントの新規登録</string>
     <string name="new_registration">新規登録</string>
     <string name="to_login_screen">ログイン画面に戻る</string>
+    <string name="debug_login">デバッグ用ログイン</string>
 </resources>
