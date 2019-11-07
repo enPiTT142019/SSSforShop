@@ -34,7 +34,7 @@
             <ImageView
                 android:id="@+id/shopImage"
                 android:layout_width="match_parent"
-                android:layout_height="224dp"
+                android:layout_height="300dp"
                 app:srcCompat="@drawable/shoppicture" />
 
             <Button
@@ -49,7 +49,7 @@
             <TextView
                 android:id="@+id/newsText"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="400dp"
                 android:text="新メニューを更新しました。"
                 android:textAlignment="center"
                 android:textSize="24sp"

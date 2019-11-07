@@ -23,12 +23,12 @@ class SubActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sub)
 
         // SubActivity起動後（ログイン後）すぐは空の画面が表示されるので、EditFragmentの画面を表示させる
-        this.supportFragmentManager.beginTransaction().replace(R.id.container, EditFragment()).commit()
+        //this.supportFragmentManager.beginTransaction().replace(R.id.container, EditFragment()).commit()
 
         // 「店舗情報の編集」ボタンを押したときの処理
         editButton.setOnClickListener {
             // EditFragmentクラスを用意
-            val fragment = EditFragment()
+            //val fragment = EditFragment()
             // ロリポップ以上のバージョンならアニメーションさせる
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 // スライドアニメーションを用意。移動方向は「START」（左から右）
@@ -37,12 +37,12 @@ class SubActivity : AppCompatActivity() {
                 val set = TransitionSet()
                 set.addTransition(slide)
                 // 新しい画面として入ってくるFragmentにアニメーションを設定する
-                fragment.enterTransition = set
+                //fragment.enterTransition = set
                 // 元の画面のFragmentにアニメーションを設定する
-                fragment.exitTransition = set
+                //fragment.exitTransition = set
             }
             // EditFragmentを表示させる
-            this.supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+            //this.supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
         }
 
         // 「お客様のご意見」ボタンを押したときの処理
