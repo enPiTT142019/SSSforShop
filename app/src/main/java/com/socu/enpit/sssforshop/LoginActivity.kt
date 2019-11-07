@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         signupButton?.isEnabled = false
 
         val progressDialog = ProgressDialog(this@LoginActivity,
-            R.style.ThemeOverlay_AppCompat_Dark)
+            R.style.Theme_AppCompat_Light_Dialog)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage("Authenticating...")
         progressDialog.show()
@@ -71,7 +71,8 @@ class LoginActivity : AppCompatActivity() {
 
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
-                this.finish()
+                //this.finish()
+                onLoginSuccess()
             }
         }
     }
@@ -81,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
         moveTaskToBack(true)
     }
 
-    fun onLoginSuccess() {
+    private fun onLoginSuccess() {
         signupButton?.isEnabled = true
         //finish()
         val intent = Intent(this, EditActivity::class.java)
@@ -89,13 +90,13 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun onLoginFailed() {
+    private fun onLoginFailed() {
         Toast.makeText(baseContext, "Login failed", Toast.LENGTH_LONG).show()
 
         signupButton?.isEnabled = true
     }
 
-    fun validate(): Boolean {
+    private fun validate(): Boolean {
         var valid = true
 
         val name = input_name?.text.toString()

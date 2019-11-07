@@ -23,7 +23,7 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    fun signup() {
+    private fun signup() {
         if (!validate()) {
             onSignupFailed()
             return
@@ -32,7 +32,7 @@ class SignupActivity : AppCompatActivity() {
         signupButton!!.isEnabled = false
 
         val progressDialog = ProgressDialog(this@SignupActivity,
-            R.style.ThemeOverlay_AppCompat_Dark)
+            R.style.Theme_AppCompat_Light_Dialog)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage("Creating Account...")
         progressDialog.show()
@@ -67,22 +67,19 @@ class SignupActivity : AppCompatActivity() {
     }
 
 
-    fun onSignupSuccess() {
+    private fun onSignupSuccess() {
         signupButton!!.isEnabled = true
         setResult(Activity.RESULT_OK, intent)
-        //finish()
-        val intent = Intent(this, EditActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        finish()
     }
 
-    fun onSignupFailed() {
+    private fun onSignupFailed() {
         Toast.makeText(baseContext, "Login failed", Toast.LENGTH_LONG).show()
 
         signupButton!!.isEnabled = true
     }
 
-    fun validate(): Boolean {
+    private fun validate(): Boolean {
         var valid = true
 
         val name = input_name!!.text.toString()
