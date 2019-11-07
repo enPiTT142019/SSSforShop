@@ -3,8 +3,12 @@ package com.socu.enpit.sssforshop
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.provider.Settings.Global.putString
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
+import androidx.core.content.edit
 import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity() {
@@ -13,10 +17,25 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
+
+
         requestButton.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
             startActivity(intent)
         }
+
+        editNewsButton.setOnClickListener {
+            if(newsEditText != null){
+                newsText.text = newsEditText.text.toString()
+            }
+        }
+
+        editMenuButton.setOnClickListener {
+            if(menuEditText != null){
+                menuText.text = menuEditText.text.toString()
+            }
+        }
+
     }
 
     // メニューを表示させる処理
