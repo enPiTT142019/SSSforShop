@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
         debugButton.setOnClickListener { onLoginSuccess() }
     }
 
-    fun login() {
+    private fun login() {
         if (!validate()) {
             onLoginFailed()
             return
