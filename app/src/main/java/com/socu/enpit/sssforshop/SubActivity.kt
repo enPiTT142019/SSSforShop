@@ -8,7 +8,8 @@ import android.transition.*
 import android.view.Window
 import kotlinx.android.synthetic.main.activity_sub.*
 import android.view.Gravity
- class SubActivity : AppCompatActivity() {
+
+class SubActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
