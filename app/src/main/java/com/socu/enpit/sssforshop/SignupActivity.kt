@@ -37,8 +37,8 @@ class SignupActivity : AppCompatActivity() {
         progressDialog.setMessage("Creating Account...")
         progressDialog.show()
 
-        val name = input_name?.text.toString()
-        val password = input_password?.text.toString()
+        val name = input_name.text.toString()
+        val password = input_password.text.toString()
 
         // TODO: Implement your own signup logic here.
         //NCMBUserのインスタンスを作成
@@ -82,8 +82,8 @@ class SignupActivity : AppCompatActivity() {
     private fun validate(): Boolean {
         var valid = true
 
-        val name = input_name!!.text.toString()
-        val password = input_password!!.text.toString()
+        val name = input_name.text.toString()
+        val password = input_password.text.toString()
 
         if (name.isEmpty() || name.length < 3) {
             input_name!!.error = "at least 3 characters"

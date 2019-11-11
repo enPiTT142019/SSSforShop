@@ -38,8 +38,8 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.setMessage("Authenticating...")
         progressDialog.show()
 
-        val name = input_name?.text.toString()
-        val password = input_password?.text.toString()
+        val name = input_name.text.toString()
+        val password = input_password.text.toString()
 
         // TODO: Implement your own authentication logic here.
         //ユーザ名とパスワードを指定してログインを実行
@@ -86,6 +86,8 @@ class LoginActivity : AppCompatActivity() {
     private fun onLoginSuccess() {
         signupButton?.isEnabled = true
         //finish()
+        val name = input_name.text.toString()
+        CloudDataManager.setAccountUserName(name)
         val intent = Intent(this, EditActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
@@ -100,8 +102,8 @@ class LoginActivity : AppCompatActivity() {
     private fun validate(): Boolean {
         var valid = true
 
-        val name = input_name?.text.toString()
-        val password = input_password?.text.toString()
+        val name = input_name.text.toString()
+        val password = input_password.text.toString()
 
         if (name.isEmpty()) {
             input_name?.error = "enter username"
