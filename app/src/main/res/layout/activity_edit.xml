@@ -48,15 +48,6 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/newsText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFEB3B"
-                android:textAlignment="textStart"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
             <EditText
                 android:id="@+id/newsEditText"
                 android:layout_width="match_parent"
@@ -73,14 +64,6 @@
                 android:text="ニュースを更新"
                 android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/menuText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#6AFF1A"
-                android:textAlignment="textStart"
-                android:textSize="30sp" />
-
             <EditText
                 android:id="@+id/menuEditText"
                 android:layout_width="match_parent"
@@ -95,6 +78,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="商品情報を更新"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/checkTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FDFBFB"
+                android:text="現在の表示"
+                android:textAlignment="textStart"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/newsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFEB3B"
+                android:textAlignment="textStart"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/menuText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#6AFF1A"
+                android:textAlignment="textStart"
                 android:textSize="30sp" />
 
         </LinearLayout>
