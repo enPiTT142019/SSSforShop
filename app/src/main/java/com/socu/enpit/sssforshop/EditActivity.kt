@@ -13,18 +13,23 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.edit
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity() {
+    private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
+        realm = Realm.getDefaultInstance()
 
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
         val editNews = pref.getString("NEWS","")
         val editMenu = pref.getString("MENU","")
+        val shopName: String = CloudDataManager.getShopName()
 
+        shopNameText.setText(shopName)
         newsText.setText(editNews)
         menuText.setText(editMenu)
 
@@ -57,6 +62,11 @@ class EditActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        realm.close()
     }
 
     // メニューを表示させる処理
