@@ -4,20 +4,23 @@ import com.nifcloud.mbaas.core.NCMBObject
 import com.nifcloud.mbaas.core.NCMBQuery
 
 object CloudDataManager {
+    private const val CLASS_NAME_EDIT_SCREEN = "EditScreen"
+    private const val KEY_ACCOUNT_USER_NAME: String = "AccountUserName"
+    private const val KEY_SHOP_NAME: String = "ShopName"
     private var accountUserName: String? = null
     fun setAccountUserName(name: String) {
         accountUserName = name
     }
     fun setShopName(name: String) {
         if (accountUserName == null) return
-        val query = NCMBQuery<NCMBObject>("EditScreen")
-        query.whereEqualTo("AccountUserName", accountUserName)
+        val query = NCMBQuery<NCMBObject>(CLASS_NAME_EDIT_SCREEN)
+        query.whereEqualTo(KEY_ACCOUNT_USER_NAME, accountUserName)
         query.setLimit(1)
         val list: List<NCMBObject> = query.find()
         if (list.isEmpty()) {
-            val obj = NCMBObject("EditScreen")
-            obj.put("AccountUserName", accountUserName)
-            obj.put("ShopName", name)
+            val obj = NCMBObject(CLASS_NAME_EDIT_SCREEN)
+            obj.put(KEY_ACCOUNT_USER_NAME, accountUserName)
+            obj.put(KEY_SHOP_NAME, name)
             obj.saveInBackground { e ->
                 if (e != null) {
                     // 保存に失敗した場合の処理
@@ -28,7 +31,7 @@ object CloudDataManager {
             return
         }
         val obj = list[0]
-        obj.put("ShopName", name)
+        obj.put(KEY_SHOP_NAME, name)
         obj.saveInBackground { e ->
             if (e != null) {
                 // 保存に失敗した場合の処理
@@ -39,14 +42,14 @@ object CloudDataManager {
     }
     fun getShopName(): String {
         if (accountUserName == null) return ""
-        val query = NCMBQuery<NCMBObject>("EditScreen")
-        query.whereEqualTo("AccountUserName", accountUserName)
+        val query = NCMBQuery<NCMBObject>(CLASS_NAME_EDIT_SCREEN)
+        query.whereEqualTo(KEY_ACCOUNT_USER_NAME, accountUserName)
         query.setLimit(1)
         val list: List<NCMBObject> = query.find()
         if (list.isEmpty()) {
-            val obj = NCMBObject("EditScreen")
-            obj.put("AccountUserName", accountUserName)
-            obj.put("ShopName", accountUserName)
+            val obj = NCMBObject(CLASS_NAME_EDIT_SCREEN)
+            obj.put(KEY_ACCOUNT_USER_NAME, accountUserName)
+            obj.put(KEY_SHOP_NAME, accountUserName)
             obj.saveInBackground { e ->
                 if (e != null) {
                     // 保存に失敗した場合の処理
@@ -57,6 +60,6 @@ object CloudDataManager {
             return accountUserName!!
         }
         val obj = list[0]
-        return obj.getString("ShopName")
+        return obj.getString(KEY_SHOP_NAME)
     }
 }
