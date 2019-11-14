@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.widget.Toast
 import com.nifcloud.mbaas.core.NCMBException
 import com.nifcloud.mbaas.core.NCMBUser
@@ -21,7 +22,11 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, SignupActivity::class.java)
             startActivityForResult(intent, REQUEST_SIGNUP)
         }
-        debugButton.setOnClickListener { onLoginSuccess() }
+        debugButton.setOnClickListener {
+            input_name.setText("パン屋")
+            input_password.setText("1234")
+            login()
+        }
     }
 
     private fun login() {
