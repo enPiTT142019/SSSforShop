@@ -13,6 +13,7 @@ object CloudDataManager {
     private const val CLASS_EACH_REQUEST = "_Request"
 
     // データの列
+    private const val KEY_CREATE_DATE: String = "createDate"
     private const val KEY_USER_NAME: String = "userName"
     private const val KEY_SHOP_NAME: String = "shopName"
     private const val KEY_TITLE: String = "title"
@@ -21,13 +22,18 @@ object CloudDataManager {
 
     private var accountUserName: String? = null
 
-    private class KeyAndData constructor(k: String, d:String) {
-        val key: String = k
-        val data: String = d
+    private class KeyAndData constructor(_key: String, _data:String) {
+        val key: String = _key
+        val data: String = _data
     }
 
     fun setAccountUserName(name: String) {
         accountUserName = name
+    }
+    private fun getStringDataList(className: String): List<NCMBObject> {
+        val query = NCMBQuery<NCMBObject>(className)
+        query.addOrderByAscending(KEY_CREATE_DATE)
+        return query.find()
     }
     private fun getStringData(className: String, findKads: List<KeyAndData>, getKey: String): String? {
         val query = NCMBQuery<NCMBObject>(className)
@@ -92,5 +98,13 @@ object CloudDataManager {
     fun setNewsText(text: String)
     {
 
+    }
+    fun getNewsDataList(): List<NewsData>
+    {
+        val className = accountUserName + CLASS_EACH_NEWS
+        val list = getStringDataList(className)
+        val ret = arrayListOf<NewsData>()
+        for(data in list) ret.add(NewsData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), data.getString(KEY_CREATE_DATE)))
+        return ret
     }
 }
