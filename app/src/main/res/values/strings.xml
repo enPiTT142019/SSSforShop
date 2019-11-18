@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">SSSforShop</string>
+    <string name="app_long_name">Support Share System for Shop</string>
+    <string name="title_bar_edit">店舗情報編集画面</string>
+    <string name="title_bar_request">お客様の要望</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="editShopInfo">店舗情報の編集</string>
     <string name="requestButton">お客様のご意見</string>
-    <string name="app_long_name">Support Share System for Shop</string>
     <string name="accountName">アカウント名</string>
     <string name="password">パスワード</string>
     <string name="login">ログイン</string>
