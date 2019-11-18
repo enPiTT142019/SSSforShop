@@ -49,11 +49,22 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewNews"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/newsEditText"
+                android:id="@+id/newsTitleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Title"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/newsContentsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -68,8 +79,23 @@
                 android:text="ニュースを更新"
                 android:textSize="30sp" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
             <EditText
-                android:id="@+id/menuEditText"
+                android:id="@+id/menuTitleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/menuContentsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -82,33 +108,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="商品情報を更新"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/checkTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FDFBFB"
-                android:text="現在の表示"
-                android:textAlignment="textStart"
-                android:textSize="35sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/newsText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFEB3B"
-                android:textAlignment="textStart"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/menuText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#6AFF1A"
-                android:textAlignment="textStart"
                 android:textSize="30sp" />
 
         </LinearLayout>

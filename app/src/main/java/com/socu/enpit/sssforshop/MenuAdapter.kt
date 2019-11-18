@@ -2,20 +2,21 @@ package com.socu.enpit.sssforshop
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.request_item.view.*
 
-class NewsAdapter(
-    private val mItems:   ArrayList<NewsData>,
+class MenuAdapter(
+    private val mItems:   ArrayList<MenuData>,
     private val mContext: Context
-): RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+): RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = mItems.size
 
-    fun addItem(item: NewsData) {
+    fun addItem(item: MenuData) {
         mItems.add(item)
         notifyDataSetChanged()
     }
