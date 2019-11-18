@@ -2,10 +2,7 @@ package com.socu.enpit.sssforshop
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.nifcloud.mbaas.core.NCMBAcl
-import com.nifcloud.mbaas.core.NCMBFile
-import com.nifcloud.mbaas.core.NCMBObject
-import com.nifcloud.mbaas.core.NCMBQuery
+import com.nifcloud.mbaas.core.*
 import java.io.ByteArrayOutputStream
 
 object CloudDataManager {
@@ -41,18 +38,28 @@ object CloudDataManager {
     private fun getStringDataList(className: String): List<NCMBObject> {
         val query = NCMBQuery<NCMBObject>(className)
         query.addOrderByAscending(KEY_CREATE_DATE)
-        return query.find()
+        try {
+            return query.find()
+        } catch (e: NCMBException) {
+            // エラー処理
+        }
+        return ArrayList()
     }
     private fun getStringData(className: String, findKads: List<KeyAndData>, getKey: String): String? {
         val query = NCMBQuery<NCMBObject>(className)
         for (kad in findKads) query.whereEqualTo(kad.key, kad.data)
         query.setLimit(1)
-        val list: List<NCMBObject> = query.find()
-        if (list.isEmpty()) {
-            return null
+        try {
+            val list: List<NCMBObject> = query.find()
+            if (list.isEmpty()) {
+                return null
+            }
+            val obj = list[0]
+            return obj.getString(getKey)
+        } catch (e: NCMBException) {
+            // エラー処理
         }
-        val obj = list[0]
-        return obj.getString(getKey)
+        return null
     }
     private fun addStringData(className: String, insertKads: List<KeyAndData>) {
         val obj = NCMBObject(className)
@@ -69,20 +76,25 @@ object CloudDataManager {
         val query = NCMBQuery<NCMBObject>(className)
         for (kad in findKads) query.whereEqualTo(kad.key, kad.data)
        query.setLimit(1)
-        val list: List<NCMBObject> = query.find()
-        if (list.isEmpty()) {
-            return false
-        }
-        val obj = list[0]
-        for (kad in insertKads) obj.put(kad.key, kad.data)
-        obj.saveInBackground { e ->
-            if (e != null) {
-                // 保存に失敗した場合の処理
-            } else {
-                // 保存に成功した場合の処理
+        try {
+            val list: List<NCMBObject> = query.find()
+            if (list.isEmpty()) {
+                return false
             }
+            val obj = list[0]
+            for (kad in insertKads) obj.put(kad.key, kad.data)
+            obj.saveInBackground { e ->
+                if (e != null) {
+                    // 保存に失敗した場合の処理
+                } else {
+                    // 保存に成功した場合の処理
+                }
+            }
+            return true
+        } catch (e: NCMBException) {
+            // エラー処理
         }
-        return true
+        return false
     }
     fun setShopName(name: String) {
         val findKads = listOf(KeyAndData(KEY_USER_NAME, accountUserName!!))
