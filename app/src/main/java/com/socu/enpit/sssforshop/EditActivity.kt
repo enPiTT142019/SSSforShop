@@ -1,28 +1,26 @@
 package com.socu.enpit.sssforshop
 
 import android.app.Activity
+import android.content.AbstractThreadedSyncAdapter
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.ConditionVariable
 import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.edit
-import io.realm.Realm
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity() {
-    private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
-        realm = Realm.getDefaultInstance()
 
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
         val editNews = pref.getString("NEWS","")
@@ -63,12 +61,6 @@ class EditActivity : AppCompatActivity() {
             }
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        realm.close()
-    }
-
     // メニューを表示させる処理
     // この関数をオーバーライドして「menu.xml」を指定することで表示される
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
