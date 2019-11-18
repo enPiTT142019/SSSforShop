@@ -36,6 +36,8 @@ class EditActivity : AppCompatActivity() {
             if(newsContentsEditText != null && newsTitleEditText != null){
                 val item = NewsData( newsTitleEditText.text.toString(), newsContentsEditText.text.toString())
                 nadapter.addItem(item)
+                newsTitleEditText.setText("Title ")
+                newsContentsEditText.text.clear()
             }
         }
 
@@ -43,6 +45,8 @@ class EditActivity : AppCompatActivity() {
             if(menuContentsEditText != null && menuTitleEditText != null){
                 val item = MenuData(menuTitleEditText.text.toString(), menuContentsEditText.text.toString())
                 madapter.addItem(item)
+                menuTitleEditText.setText("Name ")
+                menuContentsEditText.text.clear()
             }
         }
     }
