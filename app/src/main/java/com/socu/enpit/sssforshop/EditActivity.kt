@@ -1,37 +1,30 @@
 package com.socu.enpit.sssforshop
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.ConditionVariable
-import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.edit
-import io.realm.Realm
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_edit.*
+import kotlinx.android.synthetic.main.activity_request.*
 
 class EditActivity : AppCompatActivity() {
-    private lateinit var realm: Realm
+
+    private val nadapter =  NewsAdapter(ArrayList(), this)
+    private val madapter = MenuAdapter(ArrayList(), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
-        realm = Realm.getDefaultInstance()
 
-        val pref = PreferenceManager.getDefaultSharedPreferences(this)
-        val editNews = pref.getString("NEWS","")
-        val editMenu = pref.getString("MENU","")
-        val shopName: String = CloudDataManager.getShopName()
-
-        shopNameText.setText(shopName)
-        newsText.setText(editNews)
-        menuText.setText(editMenu)
+        recyclerViewNews.layoutManager = LinearLayoutManager(this)
+        recyclerViewNews.adapter = nadapter
+        recyclerViewMenu.layoutManager = LinearLayoutManager(this)
+        recyclerViewMenu.adapter = madapter
 
         requestButton.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
@@ -39,36 +32,19 @@ class EditActivity : AppCompatActivity() {
         }
 
         editNewsButton.setOnClickListener {
-            if(newsEditText != null){
-                newsText.text = newsEditText.text.toString()
-                val newsStrings: CharSequence = newsText.text
-                val pref = PreferenceManager.getDefaultSharedPreferences(this)
-                pref.edit{
-                    putString("NEWS",newsText.text.toString())
-                    putString("NEWS",newsEditText.text.toString())
-                }
+            if(newsContentsEditText != null && newsTitleEditText != null){
+                val item = NewsData( newsTitleEditText.text.toString(), newsContentsEditText.text.toString())
+                nadapter.addItem(item)
             }
         }
 
         editMenuButton.setOnClickListener {
-            if(menuEditText != null){
-                menuText.text = menuEditText.text.toString()
-                val menuStrings: CharSequence = menuText.text
-                menuEditText.hint = "商品情報を入力してください"
-                val pref = PreferenceManager.getDefaultSharedPreferences(this)
-                pref.edit{
-                    putString("MENU",menuText.text.toString())
-                    putString("NEWS",menuEditText.text.toString())
-                }
+            if(menuContentsEditText != null && menuTitleEditText != null){
+                val item = MenuData(menuTitleEditText.text.toString(), menuContentsEditText.text.toString())
+                madapter.addItem(item)
             }
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        realm.close()
-    }
-
     // メニューを表示させる処理
     // この関数をオーバーライドして「menu.xml」を指定することで表示される
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
