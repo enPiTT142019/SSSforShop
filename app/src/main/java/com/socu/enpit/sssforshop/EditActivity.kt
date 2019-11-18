@@ -6,18 +6,32 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.ConditionVariable
+import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.edit
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity() {
+    private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
+        realm = Realm.getDefaultInstance()
+
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        val editNews = pref.getString("NEWS","")
+        val editMenu = pref.getString("MENU","")
+        val shopName: String = CloudDataManager.getShopName()
+
+        shopNameText.setText(shopName)
+        newsText.setText(editNews)
+        menuText.setText(editMenu)
 
         requestButton.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
@@ -28,6 +42,11 @@ class EditActivity : AppCompatActivity() {
             if(newsEditText != null){
                 newsText.text = newsEditText.text.toString()
                 val newsStrings: CharSequence = newsText.text
+                val pref = PreferenceManager.getDefaultSharedPreferences(this)
+                pref.edit{
+                    putString("NEWS",newsText.text.toString())
+                    putString("NEWS",newsEditText.text.toString())
+                }
             }
         }
 
@@ -36,8 +55,18 @@ class EditActivity : AppCompatActivity() {
                 menuText.text = menuEditText.text.toString()
                 val menuStrings: CharSequence = menuText.text
                 menuEditText.hint = "商品情報を入力してください"
+                val pref = PreferenceManager.getDefaultSharedPreferences(this)
+                pref.edit{
+                    putString("MENU",menuText.text.toString())
+                    putString("NEWS",menuEditText.text.toString())
+                }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        realm.close()
     }
 
     // メニューを表示させる処理
