@@ -20,6 +20,7 @@ class EditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
+        setTitle(R.string.title_bar_edit)
 
         recyclerViewNews.layoutManager = LinearLayoutManager(this)
         recyclerViewNews.adapter = nadapter
