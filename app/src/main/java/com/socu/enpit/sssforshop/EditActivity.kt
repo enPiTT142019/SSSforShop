@@ -2,6 +2,9 @@ package com.socu.enpit.sssforshop
 
 import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
+import android.media.MediaPlayer
+import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -16,6 +19,8 @@ class EditActivity : AppCompatActivity() {
 
     private val nadapter =  NewsAdapter(ArrayList(), this)
     private val madapter = MenuAdapter(ArrayList(), this)
+    private lateinit var addse: SoundPool
+    private var soundResId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,29 +32,44 @@ class EditActivity : AppCompatActivity() {
         recyclerViewMenu.layoutManager = LinearLayoutManager(this)
         recyclerViewMenu.adapter = madapter
 
+
         requestButton.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
             startActivity(intent)
         }
 
         editNewsButton.setOnClickListener {
+            addse.play(soundResId, 1.0f, 1.0f, 0, 0, 1.0f)
             if(newsContentsEditText != null && newsTitleEditText != null){
                 val item = NewsData( newsTitleEditText.text.toString(), newsContentsEditText.text.toString())
                 nadapter.addItem(item)
-                newsTitleEditText.setText("Title ")
+                newsTitleEditText.text.clear()
                 newsContentsEditText.text.clear()
             }
         }
 
         editMenuButton.setOnClickListener {
+            addse.play(soundResId, 1.0f, 1.0f, 0, 0, 1.0f)
             if(menuContentsEditText != null && menuTitleEditText != null){
                 val item = MenuData(menuTitleEditText.text.toString(), menuContentsEditText.text.toString())
                 madapter.addItem(item)
-                menuTitleEditText.setText("Name ")
+                menuTitleEditText.text.clear()
                 menuContentsEditText.text.clear()
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        addse = SoundPool(2, AudioManager.STREAM_ALARM, 0)
+        soundResId = addse.load(this, R.raw.add_se, 1)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        addse.release()
+    }
+
     // メニューを表示させる処理
     // この関数をオーバーライドして「menu.xml」を指定することで表示される
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -5,9 +5,14 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.news_item.view.*
 import kotlinx.android.synthetic.main.request_item.view.*
+import kotlinx.android.synthetic.main.request_item.view.contentsText
+import kotlinx.android.synthetic.main.request_item.view.dateText
+import kotlinx.android.synthetic.main.request_item.view.titleText
 
 class MenuAdapter(
     private val mItems:   ArrayList<MenuData>,
@@ -38,11 +43,15 @@ class MenuAdapter(
 
         // reference: Y.A.M の 雑記帳: SimpleDateFormat ではなく android.text.format.DateFormat を使おう - http://bit.ly/2OybKLu
         //holder.tvCreatedAt.text = DateFormat.format("yyyy/MM/dd kk:mm:ss", mItems[position].mCreatedAt).toString()
+        holder.btRemoveItem?.setOnClickListener(){
+            removeItem(position)
+        }
     }
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val title:       TextView    = view.titleText
         val contents:  TextView    = view.contentsText
         val date: TextView = view.dateText
+        val btRemoveItem: Button? = view.deleteButton
     }
 }
