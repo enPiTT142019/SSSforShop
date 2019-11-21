@@ -7,7 +7,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/titleText"
@@ -18,18 +26,28 @@
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/dateText"
-            android:layout_width="wrap_content"
+            android:id="@+id/contentsText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="TextView"
             android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/Line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#5E5D5D"
+            android:textSize="2sp" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#BBBBBB"
+            android:text="Delete"
+            android:textSize="25sp" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/contentsText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp" />
 </LinearLayout>
