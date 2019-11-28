@@ -17,6 +17,7 @@ object CloudDataManager {
 
     // データの列
     private const val KEY_CREATE_DATE: String = "createDate"
+    private const val KEY_MY_CREATE_DATE: String = "myCreateDate"
     private const val KEY_USER_NAME: String = "userName"
     private const val KEY_SHOP_NAME: String = "shopName"
     private const val KEY_TITLE: String = "title"
@@ -116,7 +117,7 @@ object CloudDataManager {
         return accountUserName!!
     }
     fun addNewsData(data: NewsData) {
-        val kads = listOf(KeyAndData(KEY_TITLE, data.title), KeyAndData(KEY_CONTENTS, data.contents))
+        val kads = listOf(KeyAndData(KEY_TITLE, data.title), KeyAndData(KEY_CONTENTS, data.contents), KeyAndData(KEY_MY_CREATE_DATE, data.date))
         val className = getClassEachName(CLASS_EACH_NEWS)
         addStringData(className, kads)
     }
@@ -124,11 +125,11 @@ object CloudDataManager {
         val className = getClassEachName(CLASS_EACH_NEWS)
         val list = getStringDataList(className)
         val ret = arrayListOf<NewsData>()
-        for(data in list) ret.add(NewsData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), data.getString(KEY_CREATE_DATE)))
+        for(data in list) ret.add(NewsData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), data.getString(KEY_MY_CREATE_DATE)))
         return ret
     }
     fun addMenuData(data: MenuData) {
-        val kads = listOf(KeyAndData(KEY_TITLE, data.title), KeyAndData(KEY_CONTENTS, data.contents))
+        val kads = listOf(KeyAndData(KEY_TITLE, data.title), KeyAndData(KEY_CONTENTS, data.contents), KeyAndData(KEY_MY_CREATE_DATE, data.date))
         val className = getClassEachName(CLASS_EACH_MENU)
         addStringData(className, kads)
     }
@@ -136,11 +137,11 @@ object CloudDataManager {
         val className = getClassEachName(CLASS_EACH_MENU)
         val list = getStringDataList(className)
         val ret = arrayListOf<MenuData>()
-        for(data in list) ret.add(MenuData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), data.getString(KEY_CREATE_DATE)))
+        for(data in list) ret.add(MenuData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), data.getString(KEY_MY_CREATE_DATE)))
         return ret
     }
     fun addRequestData(data: RequestData) {
-        val kads = listOf(KeyAndData(KEY_TITLE, data.title), KeyAndData(KEY_CONTENTS, data.contents))
+        val kads = listOf(KeyAndData(KEY_TITLE, data.title), KeyAndData(KEY_CONTENTS, data.contents), KeyAndData(KEY_MY_CREATE_DATE, data.date))
         val className = getClassEachName(CLASS_EACH_REQUEST)
         addStringData(className, kads)
     }
@@ -148,7 +149,7 @@ object CloudDataManager {
         val className = getClassEachName(CLASS_EACH_REQUEST)
         val list = getStringDataList(className)
         val ret = arrayListOf<RequestData>()
-        for(data in list) ret.add(RequestData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), data.getString(KEY_CREATE_DATE)))
+        for(data in list) ret.add(RequestData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), data.getString(KEY_MY_CREATE_DATE)))
         return ret
     }
     fun addGroceryData(data: GroceryData) {
