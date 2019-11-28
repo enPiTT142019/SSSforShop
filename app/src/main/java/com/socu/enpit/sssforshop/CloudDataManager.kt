@@ -16,7 +16,7 @@ object CloudDataManager {
     private const val CLASS_EACH_REQUEST = "_Request"
 
     // データの列
-    private const val KEY_CREATE_DATE: String = "createDate"
+    //private const val KEY_CREATE_DATE: String = "createDate"
     private const val KEY_MY_CREATE_DATE: String = "myCreateDate"
     private const val KEY_USER_NAME: String = "userName"
     private const val KEY_SHOP_NAME: String = "shopName"
@@ -39,7 +39,7 @@ object CloudDataManager {
     }
     private fun getStringDataList(className: String): List<NCMBObject> {
         val query = NCMBQuery<NCMBObject>(className)
-        query.addOrderByAscending(KEY_CREATE_DATE)
+        query.addOrderByAscending(KEY_MY_CREATE_DATE)
         try {
             return query.find()
         } catch (e: NCMBException) {
@@ -177,7 +177,7 @@ object CloudDataManager {
             val file = NCMBFile(imageName)
             val dataFetch = file.fetch()
             val bitmap = BitmapFactory.decodeByteArray(dataFetch, 0, dataFetch.size)
-            ret.add(GroceryData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), imageName, bitmap, data.getString(KEY_CREATE_DATE)))
+            ret.add(GroceryData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), imageName, bitmap, data.getString(KEY_MY_CREATE_DATE)))
         }
         return ret
     }
