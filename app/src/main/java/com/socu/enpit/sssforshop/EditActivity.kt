@@ -7,6 +7,7 @@ import android.media.MediaPlayer
 import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -14,6 +15,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.android.synthetic.main.activity_request.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class EditActivity : AppCompatActivity() {
 
@@ -27,11 +30,16 @@ class EditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
         setTitle(R.string.title_bar_edit)
 
+        shopNameText.text = CloudDataManager.getShopName()
+
         recyclerViewNews.layoutManager = LinearLayoutManager(this)
         recyclerViewNews.adapter = nadapter
         recyclerViewMenu.layoutManager = LinearLayoutManager(this)
         recyclerViewMenu.adapter = madapter
 
+        nadapter.removeAllItems()
+        val list = CloudDataManager.getNewsDataList()
+        nadapter.addItemList(list)
 
         requestButton.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
@@ -41,10 +49,11 @@ class EditActivity : AppCompatActivity() {
         editNewsButton.setOnClickListener {
             addse.play(soundResId, 1.0f, 1.0f, 0, 0, 1.0f)
             if(newsContentsEditText != null && newsTitleEditText != null){
-                val item = NewsData( newsTitleEditText.text.toString(), newsContentsEditText.text.toString())
+                val item = NewsData( newsTitleEditText.text.toString(), newsContentsEditText.text.toString(), DateFormat.format("yyyy/MM/dd kk:mm:ss", Calendar.getInstance()).toString())
                 nadapter.addItem(item)
                 newsTitleEditText.text.clear()
                 newsContentsEditText.text.clear()
+                CloudDataManager.addNewsData(item)
             }
         }
 
