@@ -69,6 +69,8 @@ class SignupActivity : AppCompatActivity() {
 
     private fun onSignupSuccess() {
         signupButton!!.isEnabled = true
+        val name = input_name.text.toString()
+        intent.putExtra("input_name", name)
         setResult(Activity.RESULT_OK, intent)
         finish()
     }

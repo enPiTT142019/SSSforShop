@@ -58,7 +58,8 @@ class LoginActivity : AppCompatActivity() {
                     android.os.Handler().postDelayed(
                         {
                             // On complete call either onLoginSuccess or onLoginFailed
-                            onLoginSuccess()
+                            val name = input_name.text.toString()
+                            onLoginSuccess(name)
                             // onLoginFailed();
                             progressDialog.dismiss()
                         }, 3000)
@@ -77,8 +78,9 @@ class LoginActivity : AppCompatActivity() {
 
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
-                //this.finish()
-                onLoginSuccess()
+
+                val name = data?.getStringExtra("input_name")
+                onLoginSuccess(name!!)
             }
         }
     }
@@ -88,11 +90,9 @@ class LoginActivity : AppCompatActivity() {
         moveTaskToBack(true)
     }
 
-    private fun onLoginSuccess() {
+    private fun onLoginSuccess(userName: String) {
         signupButton?.isEnabled = true
-        //finish()
-        val name = input_name.text.toString()
-        CloudDataManager.setAccountUserName(name)
+        CloudDataManager.setAccountUserName(userName)
         val intent = Intent(this, EditActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
