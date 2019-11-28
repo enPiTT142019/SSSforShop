@@ -29,6 +29,17 @@ class NewsAdapter(
         notifyDataSetChanged()
     }
 
+    fun addItemList(list: List<NewsData>) {
+        for (item in list) {
+            addItem(item)
+        }
+    }
+
+    fun removeAllItems() {
+        mItems.clear()
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(LayoutInflater.from(mContext).inflate(
         R.layout.news_item, parent, false))
 
