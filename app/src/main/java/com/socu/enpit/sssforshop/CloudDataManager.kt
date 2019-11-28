@@ -11,6 +11,7 @@ object CloudDataManager {
 
     // 店舗ごとに存在するクラス
     private const val CLASS_EACH_NEWS = "_News"
+    private const val CLASS_EACH_MENU = "_Menu"
     private const val CLASS_EACH_GROCERIES = "_Groceries"
     private const val CLASS_EACH_REQUEST = "_Request"
 
@@ -124,6 +125,18 @@ object CloudDataManager {
         val list = getStringDataList(className)
         val ret = arrayListOf<NewsData>()
         for(data in list) ret.add(NewsData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), data.getString(KEY_CREATE_DATE)))
+        return ret
+    }
+    fun addMenuData(data: MenuData) {
+        val kads = listOf(KeyAndData(KEY_TITLE, data.title), KeyAndData(KEY_CONTENTS, data.contents))
+        val className = getClassEachName(CLASS_EACH_MENU)
+        addStringData(className, kads)
+    }
+    fun getMenuDataList(): List<MenuData> {
+        val className = getClassEachName(CLASS_EACH_MENU)
+        val list = getStringDataList(className)
+        val ret = arrayListOf<MenuData>()
+        for(data in list) ret.add(MenuData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), data.getString(KEY_CREATE_DATE)))
         return ret
     }
     fun addRequestData(data: RequestData) {
