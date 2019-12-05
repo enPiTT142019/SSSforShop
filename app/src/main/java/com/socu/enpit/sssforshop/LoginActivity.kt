@@ -23,8 +23,8 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(intent, REQUEST_SIGNUP)
         }
         debugButton.setOnClickListener {
-            input_name.setText("パン屋")
-            input_password.setText("1234")
+            input_name.setText("panya")
+            input_password.setText("panya")
             login()
         }
     }
