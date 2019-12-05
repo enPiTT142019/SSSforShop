@@ -16,7 +16,7 @@ object CloudDataManager {
     private const val CLASS_EACH_REQUEST = "_Request"
 
     // データの列
-    //private const val KEY_CREATE_DATE: String = "createDate"
+    //private const val KEY_CREATE_DATE: String = "createDate" // ニフクラ側が勝手に作る時刻。もう使わないかも。
     private const val KEY_MY_CREATE_DATE: String = "myCreateDate"
     private const val KEY_USER_NAME: String = "userName"
     private const val KEY_SHOP_NAME: String = "shopName"
@@ -33,6 +33,19 @@ object CloudDataManager {
 
     fun setAccountUserName(name: String) {
         accountUserName = name
+    }
+    fun setAccountUserNameDefault() {
+        accountUserName = "_everyone"
+    }
+    fun setAccountUserNameFromShopName(shopName: String): Boolean {
+        val findKads = listOf(KeyAndData(KEY_SHOP_NAME, shopName))
+        val ret = getStringData(CLASS_SHARE_SHOP_INFO, findKads, KEY_USER_NAME)
+        if (ret != null)
+        {
+            accountUserName = ret
+            return true
+        }
+        return false
     }
     private fun getClassEachName(className: String): String {
         return accountUserName!! + className
@@ -77,7 +90,7 @@ object CloudDataManager {
     private fun overwriteStringData(className: String, findKads: List<KeyAndData>, insertKads: List<KeyAndData>): Boolean {
         val query = NCMBQuery<NCMBObject>(className)
         for (kad in findKads) query.whereEqualTo(kad.key, kad.data)
-       query.setLimit(1)
+        query.setLimit(1)
         try {
             val list: List<NCMBObject> = query.find()
             if (list.isEmpty()) {
@@ -151,34 +164,41 @@ object CloudDataManager {
         val ret = arrayListOf<RequestData>()
         for(data in list) ret.add(RequestData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), data.getString(KEY_MY_CREATE_DATE)))
         return ret
-    }
-    fun addGroceryData(data: GroceryData) {
-        val byteArrayStream = ByteArrayOutputStream()
-        data.bitmap.compress(Bitmap.CompressFormat.PNG, 0, byteArrayStream)
-        val dataByte = byteArrayStream.toByteArray()
-        val acl = NCMBAcl()
-        acl.publicReadAccess = true
-        acl.publicWriteAccess = true
-        val file = NCMBFile(data.imageName, dataByte, acl)
-        file.saveInBackground { e ->
-            if (e != null) {
-                // 保存に失敗した場合の処理
-            } else {
-                // 保存に成功した場合の処理
-            }
-        }
-    }
-    fun getGroceryDataList(): List<GroceryData> {
-        val className = getClassEachName(CLASS_EACH_GROCERIES)
-        val list = getStringDataList(className)
-        val ret = arrayListOf<GroceryData>()
-        for(data in list) {
-            val imageName = data.getString(KEY_IMAGE_NAME)
-            val file = NCMBFile(imageName)
-            val dataFetch = file.fetch()
-            val bitmap = BitmapFactory.decodeByteArray(dataFetch, 0, dataFetch.size)
-            ret.add(GroceryData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), imageName, bitmap, data.getString(KEY_MY_CREATE_DATE)))
-        }
-        return ret
-    }
+    }//    fun addGroceryData(data: GroceryData) {
+//        val byteArrayStream = ByteArrayOutputStream()
+//        data.bitmap.compress(Bitmap.CompressFormat.PNG, 0, byteArrayStream)
+//        val dataByte = byteArrayStream.toByteArray()
+//        val acl = NCMBAcl()
+//        acl.publicReadAccess = true
+//        acl.publicWriteAccess = true
+//        val file = NCMBFile(data.imageName, dataByte, acl)
+//        file.saveInBackground { e ->
+//            if (e != null) {
+//                // 保存に失敗した場合の処理
+//            } else {
+//                // 保存に成功した場合の処理
+//            }
+//        }
+//    }
+//    fun getGroceryDataList(): List<GroceryData> {
+//        val className = getClassEachName(CLASS_EACH_GROCERIES)
+//        val list = getStringDataList(className)
+//        val ret = arrayListOf<GroceryData>()
+//        for(data in list) {
+//            val imageName = data.getString(KEY_IMAGE_NAME)
+//            val file = NCMBFile(imageName)
+//            val dataFetch = file.fetch()
+//            val bitmap = BitmapFactory.decodeByteArray(dataFetch, 0, dataFetch.size)
+//            ret.add(GroceryData(data.getString(KEY_TITLE), data.getString(KEY_CONTENTS), imageName, bitmap, data.getString(KEY_CREATE_DATE)))
+//        }
+//        return ret
+//    }
+//
+    // SSSの方で使う関数
+//    fun getShopDataList(): List<ShopData> {
+//        val list = getStringDataList(CLASS_SHARE_SHOP_INFO)
+//        val ret = arrayListOf<ShopData>()
+//        for(data in list) ret.add(ShopData(data.getString(KEY_SHOP_NAME)))
+//        return ret
+//    }
 }
