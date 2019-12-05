@@ -34,7 +34,7 @@ class SignupActivity : AppCompatActivity() {
         val progressDialog = ProgressDialog(this@SignupActivity,
             R.style.Theme_AppCompat_Light_Dialog)
         progressDialog.isIndeterminate = true
-        progressDialog.setMessage("Creating Account...")
+        progressDialog.setMessage("アカウントを作成しています...")
         progressDialog.show()
 
         val name = input_name.text.toString()
@@ -76,7 +76,7 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun onSignupFailed() {
-        Toast.makeText(baseContext, "Login failed", Toast.LENGTH_LONG).show()
+        Toast.makeText(baseContext, "そのアカウント名は既に存在しています。", Toast.LENGTH_LONG).show()
 
         signupButton!!.isEnabled = true
     }
@@ -88,14 +88,17 @@ class SignupActivity : AppCompatActivity() {
         val password = input_password.text.toString()
 
         if (name.isEmpty() || name.length < 3) {
-            input_name!!.error = "at least 3 characters"
+            input_name!!.error = "3文字以上の半角英数字を入力してください。"
+            valid = false
+        } else if (name == CloudDataManager.getAccountUserNameDefault()) {
+            input_name!!.error = "その名前は使用できません。"
             valid = false
         } else {
             input_name!!.error = null
         }
 
         if (password.isEmpty() || password.length < 4 || password.length > 10) {
-            input_password!!.error = "between 4 and 10 alphanumeric characters"
+            input_password!!.error = "4から10文字の半角英数字を入力してください。"
             valid = false
         } else {
             input_password!!.error = null

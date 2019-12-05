@@ -24,6 +24,9 @@ object CloudDataManager {
     private const val KEY_CONTENTS: String = "contents"
     private const val KEY_IMAGE_NAME: String = "imageName"
 
+    // 全店舗リクエスト用アカウント名
+    private const val DEFAULT_ACCOUNT_USER_NAME = "_everyone"
+
     private var accountUserName: String? = null
 
     private class KeyAndData constructor(_key: String, _data:String) {
@@ -35,7 +38,10 @@ object CloudDataManager {
         accountUserName = name
     }
     fun setAccountUserNameDefault() {
-        accountUserName = "_everyone"
+        accountUserName = DEFAULT_ACCOUNT_USER_NAME
+    }
+    fun getAccountUserNameDefault(): String {
+        return DEFAULT_ACCOUNT_USER_NAME
     }
     fun setAccountUserNameFromShopName(shopName: String): Boolean {
         val findKads = listOf(KeyAndData(KEY_SHOP_NAME, shopName))

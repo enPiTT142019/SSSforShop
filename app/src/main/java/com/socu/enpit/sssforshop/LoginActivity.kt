@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         val progressDialog = ProgressDialog(this@LoginActivity,
             R.style.Theme_AppCompat_Light_Dialog)
         progressDialog.isIndeterminate = true
-        progressDialog.setMessage("Authenticating...")
+        progressDialog.setMessage("ログイン中...")
         progressDialog.show()
 
         val name = input_name.text.toString()
@@ -99,7 +99,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onLoginFailed() {
-        Toast.makeText(baseContext, "Login failed", Toast.LENGTH_LONG).show()
+        Toast.makeText(baseContext, "アカウント名かパスワードが間違っています。", Toast.LENGTH_LONG).show()
 
         signupButton?.isEnabled = true
     }
@@ -111,16 +111,19 @@ class LoginActivity : AppCompatActivity() {
         val password = input_password.text.toString()
 
         if (name.isEmpty()) {
-            input_name?.error = "enter username"
+            input_name?.error = "アカウント名を入力してください。"
+            valid = false
+        } else if (name == CloudDataManager.getAccountUserNameDefault()) {
+            input_name!!.error = "その名前は使用できません。"
             valid = false
         } else {
             input_name?.error = null
         }
 
         if (password.isEmpty() || password.length < 4 || password.length > 10) {
-            input_password?.error = "between 4 and 10 alphanumeric characters"
+            input_password?.error = "4から10文字の半角英数字を入力してください。"
             valid = false
-        } else {
+        }  else {
             input_password?.error = null
         }
 
