@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -25,19 +27,19 @@
             android:text="TextView"
             android:textSize="30sp" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <TextView
             android:id="@+id/contentsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/Line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#5E5D5D"
-            android:textSize="2sp" />
 
         <Button
             android:id="@+id/deleteButton"
@@ -47,6 +49,13 @@
             android:background="#BBBBBB"
             android:text="Delete"
             android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/Line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#5E5D5D"
+            android:textSize="2sp" />
 
     </LinearLayout>
 

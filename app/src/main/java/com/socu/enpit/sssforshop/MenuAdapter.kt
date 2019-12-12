@@ -1,6 +1,12 @@
 package com.socu.enpit.sssforshop
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -13,6 +19,7 @@ import kotlinx.android.synthetic.main.request_item.view.*
 import kotlinx.android.synthetic.main.request_item.view.contentsText
 import kotlinx.android.synthetic.main.request_item.view.dateText
 import kotlinx.android.synthetic.main.request_item.view.titleText
+import java.io.IOException
 
 class MenuAdapter(
     private val mItems:   ArrayList<MenuData>,
@@ -34,7 +41,6 @@ class MenuAdapter(
         notifyItemRemoved(position)
         notifyDataSetChanged()
     }
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.text = mItems[position].title
