@@ -29,7 +29,7 @@ object CloudDataManager {
 
     // 画像ファイル名
     // お店画像。アカウント名の後ろにつける。
-    private const val IMAGE_NAME = "_ShopImage"
+    private const val IMAGE_NAME = "_ShopImage.png"
 
     private var accountUserName: String? = null
 
@@ -156,11 +156,16 @@ object CloudDataManager {
             }
         }
     }
-    fun getShopImage() : Bitmap {
-        val imageName = accountUserName!! + IMAGE_NAME
-        val file = NCMBFile(imageName)
-        val dataFetch = file.fetch()
-        return BitmapFactory.decodeByteArray(dataFetch, 0, dataFetch.size)
+    fun getShopImage() : Bitmap? {
+        try {
+            val imageName = accountUserName!! + IMAGE_NAME
+            val file = NCMBFile(imageName)
+            val dataFetch = file.fetch()
+            return BitmapFactory.decodeByteArray(dataFetch, 0, dataFetch.size)
+        } catch (e: NCMBException) {
+
+        }
+        return null
     }
     fun addNewsData(data: NewsData) {
         val kads = listOf(KeyAndData(KEY_TITLE, data.title), KeyAndData(KEY_CONTENTS, data.contents), KeyAndData(KEY_MY_CREATE_DATE, data.date))
