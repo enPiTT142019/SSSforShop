@@ -24,14 +24,14 @@ class NewsAdapter(
     /*private lateinit var removese: SoundPool
     private var soundResId = 1*/
 
-    fun addItem(item: NewsData) {
-        mItems.add(item)
+    fun addItem(nitem: NewsData) {
+        mItems.add(nitem)
         notifyDataSetChanged()
     }
 
     fun addItemList(list: List<NewsData>) {
-        for (item in list) {
-            addItem(item)
+        for (nitem in list) {
+            addItem(nitem)
         }
     }
 
