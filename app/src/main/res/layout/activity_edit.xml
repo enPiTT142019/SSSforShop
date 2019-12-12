@@ -32,7 +32,7 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#FCF7F7"
-                android:textSize="40sp" />
+                android:textSize="60sp" />
 
             <ImageView
                 android:id="@+id/shopImage"

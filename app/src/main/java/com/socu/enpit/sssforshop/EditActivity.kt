@@ -30,8 +30,6 @@ class EditActivity : AppCompatActivity() {
     private val madapter = MenuAdapter(ArrayList(), this)
     private lateinit var addse: SoundPool
     private var soundResId = 0
-    private var shopImageView: ImageView? = null
-    private var menuImageView: ImageView? = null
     var setImageNum = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +37,8 @@ class EditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
         setTitle(R.string.title_bar_edit)
 
-        shopImageView = findViewById<View>(R.id.shopImage) as ImageView
+        val sImage = CloudDataManager.getShopImage()
+        shopImage.setImageBitmap(sImage)
         findViewById<View>(R.id.editImageButton).setOnClickListener {
             setImageNum = 1
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
@@ -48,7 +47,6 @@ class EditActivity : AppCompatActivity() {
             startActivityForResult(intent, RESULT_PICK_IMAGEFILE)
         }
 
-        menuImageView = findViewById<View>(R.id.menuImage) as ImageView
         findViewById<View>(R.id.setMenuImageButton).setOnClickListener {
             setImageNum = 2
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
@@ -65,8 +63,12 @@ class EditActivity : AppCompatActivity() {
         recyclerViewMenu.adapter = madapter
 
         nadapter.removeAllItems()
-        val list = CloudDataManager.getNewsDataList()
-        nadapter.addItemList(list)
+        val nlist = CloudDataManager.getNewsDataList()
+        nadapter.addItemList(nlist)
+
+        madapter.removeAllItems()
+        val mlist = CloudDataManager.getMenuDataList()
+        madapter.addItemList(mlist)
 
         requestButton.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
@@ -87,10 +89,11 @@ class EditActivity : AppCompatActivity() {
         editMenuButton.setOnClickListener {
             addse.play(soundResId, 1.0f, 1.0f, 0, 0, 1.0f)
             if(menuContentsEditText != null && menuTitleEditText != null){
-                val item = MenuData(menuTitleEditText.text.toString(), menuContentsEditText.text.toString())
+                val item = MenuData(menuTitleEditText.text.toString(), menuContentsEditText.text.toString(), DateFormat.format("yyyy/MM/dd kk:mm:ss", Calendar.getInstance()).toString())
                 madapter.addItem(item)
                 menuTitleEditText.text.clear()
                 menuContentsEditText.text.clear()
+                CloudDataManager.addMenuData(item)
             }
         }
     }
@@ -105,7 +108,8 @@ class EditActivity : AppCompatActivity() {
 
                 try {
                     val bmp = getBitmapFromUri(uri)
-                    shopImageView!!.setImageBitmap(bmp)
+                    shopImage.setImageBitmap(bmp)
+                    CloudDataManager.setShopImage(bmp)
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
@@ -114,7 +118,7 @@ class EditActivity : AppCompatActivity() {
 
                 try {
                     val bmp = getBitmapFromUri(uri)
-                    menuImageView!!.setImageBitmap(bmp)
+                    menuImage.setImageBitmap(bmp)
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
