@@ -37,9 +37,8 @@
             <ImageView
                 android:id="@+id/shopImage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#00FF0000"
-                app:srcCompat="@drawable/bread_panya" />
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <Button
                 android:id="@+id/editImageButton"
@@ -48,7 +47,7 @@
                 android:background="#00BCD4"
                 android:text="店の写真を編集"
                 android:textAlignment="center"
-                android:textSize="30sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -86,7 +85,8 @@
                 android:layout_height="wrap_content"
                 android:background="#00BCD4"
                 android:text="ニュースを更新"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewMenu"
@@ -103,6 +103,23 @@
                 android:hint="商品名を入力してください"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/menuImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <Button
+                android:id="@+id/setMenuImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFCFC"
+                android:text="商品の画像追加"
+                android:textAlignment="viewStart"
+                android:textColor="#8D8C8C"
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
@@ -123,7 +140,10 @@
                 android:layout_height="wrap_content"
                 android:background="#00BCD4"
                 android:text="商品情報を更新"
-                android:textSize="40sp" />
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

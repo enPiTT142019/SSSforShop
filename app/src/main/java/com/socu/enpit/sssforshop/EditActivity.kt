@@ -1,20 +1,26 @@
 package com.socu.enpit.sssforshop
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.media.AudioManager
-import android.media.MediaPlayer
 import android.media.SoundPool
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_edit.*
-import kotlinx.android.synthetic.main.activity_request.*
+import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -24,11 +30,32 @@ class EditActivity : AppCompatActivity() {
     private val madapter = MenuAdapter(ArrayList(), this)
     private lateinit var addse: SoundPool
     private var soundResId = 0
+    private var shopImageView: ImageView? = null
+    private var menuImageView: ImageView? = null
+    var setImageNum = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
         setTitle(R.string.title_bar_edit)
+
+        shopImageView = findViewById<View>(R.id.shopImage) as ImageView
+        findViewById<View>(R.id.editImageButton).setOnClickListener {
+            setImageNum = 1
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.type = "image/*"
+            startActivityForResult(intent, RESULT_PICK_IMAGEFILE)
+        }
+
+        menuImageView = findViewById<View>(R.id.menuImage) as ImageView
+        findViewById<View>(R.id.setMenuImageButton).setOnClickListener {
+            setImageNum = 2
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.type = "image/*"
+            startActivityForResult(intent, RESULT_PICK_IMAGEFILE)
+        }
 
         shopNameText.text = CloudDataManager.getShopName()
 
@@ -68,6 +95,47 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
+    //画像入れ替え
+    @SuppressLint("MissingSuperCall")
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
+        if (requestCode == RESULT_PICK_IMAGEFILE && resultCode == Activity.RESULT_OK) {
+            var uri: Uri? = null
+            if (resultData != null && setImageNum == 1) {
+                uri = resultData.data
+
+                try {
+                    val bmp = getBitmapFromUri(uri)
+                    shopImageView!!.setImageBitmap(bmp)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }else if (resultData != null && setImageNum == 2) {
+                uri = resultData.data
+
+                try {
+                    val bmp = getBitmapFromUri(uri)
+                    menuImageView!!.setImageBitmap(bmp)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    @Throws(IOException::class)
+    private fun getBitmapFromUri(uri: Uri?): Bitmap {
+        val parcelFileDescriptor = contentResolver.openFileDescriptor(uri!!, "r")
+        val fileDescriptor = parcelFileDescriptor!!.fileDescriptor
+        val image = BitmapFactory.decodeFileDescriptor(fileDescriptor)
+        parcelFileDescriptor.close()
+        return image
+    }
+
+    companion object {
+        private val RESULT_PICK_IMAGEFILE = 1000
+    }
+
+    //ボタンSE
     override fun onResume() {
         super.onResume()
         addse = SoundPool(2, AudioManager.STREAM_ALARM, 0)
