@@ -36,10 +36,30 @@
                 android:textColorHighlight="#FFB98F"
                 android:textSize="60sp" />
 
+            <EditText
+                android:id="@+id/editShopNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="店の名前を入力してください"
+                android:inputType="textPersonName"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/editShopNameButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_imagebutton_style"
+
+                android:text="店の名前を編集"
+                android:textColor="#FFFDFD"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
             <ImageView
                 android:id="@+id/shopImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="310dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <Button

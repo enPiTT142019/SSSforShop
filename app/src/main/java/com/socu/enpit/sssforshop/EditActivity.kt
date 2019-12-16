@@ -69,6 +69,14 @@ class EditActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        editShopNameButton.setOnClickListener {
+            if(editShopNameText != null && editShopNameText.text.toString() != ""){
+                val shopName = editShopNameText.text.toString()
+                shopNameText.text = shopName
+                CloudDataManager.setShopName(shopName)
+            }
+        }
+
         editNewsButton.setOnClickListener {
             addse.play(soundResId, 1.0f, 1.0f, 0, 0, 1.0f)
             if(newsContentsEditText != null && newsTitleEditText != null){
