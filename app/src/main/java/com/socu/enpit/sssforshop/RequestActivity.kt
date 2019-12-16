@@ -22,16 +22,12 @@ class RequestActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
+        adapter.removeAllItems()
+        val requestDataList = CloudDataManager.getRequestDataList()
+        for (request in requestDataList) adapter.addItem(request)
+
         returnEditScreenButton.setOnClickListener {finish()}
 
-        upDateButton.setOnClickListener{
-            adapter.removeAllItems()
-            val list = CloudDataManager.getRequestDataList()
-            for (item in list) adapter.addItem((item))
-
-            Toast.makeText(this, "更新しました。", Toast.LENGTH_SHORT).show()
-
-        }
     }
 
     // メニューを表示させる処理
