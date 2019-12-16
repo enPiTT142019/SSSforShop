@@ -17,7 +17,6 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_edit.*
 import java.io.IOException
@@ -37,8 +36,8 @@ class EditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
         setTitle(R.string.title_bar_edit)
 
-        val sImage = CloudDataManager.getShopImage()
-        shopImage.setImageBitmap(sImage)
+        CloudDataManager.getShopImage {bmp -> shopImage.setImageBitmap(bmp)}
+
         findViewById<View>(R.id.editImageButton).setOnClickListener {
             setImageNum = 1
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
@@ -62,13 +61,8 @@ class EditActivity : AppCompatActivity() {
         recyclerViewMenu.layoutManager = LinearLayoutManager(this)
         recyclerViewMenu.adapter = madapter
 
-        nadapter.removeAllItems()
-        val nlist = CloudDataManager.getNewsDataList()
-        nadapter.addItemList(nlist)
-
-        madapter.removeAllItems()
-        val mlist = CloudDataManager.getMenuDataList()
-        madapter.addItemList(mlist)
+        loadNewsDataList()
+        loadMenuDataList()
 
         requestButton.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
@@ -98,13 +92,24 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
+    private fun loadNewsDataList() {
+        nadapter.removeAllItems()
+        val nlist = CloudDataManager.getNewsDataList()
+        nadapter.addItemList(nlist)
+    }
+
+    private fun loadMenuDataList() {
+        madapter.removeAllItems()
+        val mlist = CloudDataManager.getMenuDataList()
+        madapter.addItemList(mlist)
+    }
+
     //画像入れ替え
     @SuppressLint("MissingSuperCall")
     public override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
         if (requestCode == RESULT_PICK_IMAGEFILE && resultCode == Activity.RESULT_OK) {
-            var uri: Uri? = null
             if (resultData != null && setImageNum == 1) {
-                uri = resultData.data
+                val uri = resultData.data
 
                 try {
                     val bmp = getBitmapFromUri(uri)
@@ -114,7 +119,7 @@ class EditActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
             }else if (resultData != null && setImageNum == 2) {
-                uri = resultData.data
+                val uri = resultData.data
 
                 try {
                     val bmp = getBitmapFromUri(uri)
@@ -136,7 +141,7 @@ class EditActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val RESULT_PICK_IMAGEFILE = 1000
+        private const val RESULT_PICK_IMAGEFILE = 1000
     }
 
     //ボタンSE
@@ -160,14 +165,17 @@ class EditActivity : AppCompatActivity() {
 
     // メニューを選択したときの動作をここに書く
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val itemId = item?.itemId
-        when (itemId) {
+        when (item?.itemId) {
             // メニューの「ログアウト」を押したとき
             R.id.menu_logout -> {
                 // MainActivity（ログイン画面）に遷移する
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
+            }
+            R.id.menu_reload -> {
+                loadNewsDataList()
+                loadMenuDataList()
             }
         }
         return super.onOptionsItemSelected(item)
