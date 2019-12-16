@@ -37,8 +37,8 @@ class EditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
         setTitle(R.string.title_bar_edit)
 
-        val sImage = CloudDataManager.getShopImage()
-        shopImage.setImageBitmap(sImage)
+        CloudDataManager.getShopImage {bmp -> shopImage.setImageBitmap(bmp)}
+
         findViewById<View>(R.id.editImageButton).setOnClickListener {
             setImageNum = 1
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
