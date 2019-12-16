@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/dateText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="TextView"
@@ -21,8 +21,8 @@
 
         <TextView
             android:id="@+id/titleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="30sp" />
@@ -45,7 +45,7 @@
             android:id="@+id/Line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#5E5D5D"
+            android:background="#000000"
             android:textSize="2sp" />
 
     </LinearLayout>
