@@ -18,4 +18,5 @@
     <string name="to_login_screen">ログイン画面に戻る</string>
     <string name="debug_login">「panya」アカウントでログイン</string>
     <string name="thisIsDebugButton">デバッグ用ボタン</string>
+    <string name="reload">読み込み直す</string>
 </resources>

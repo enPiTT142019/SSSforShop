@@ -28,8 +28,19 @@ class MenuAdapter(
 
     override fun getItemCount(): Int = mItems.size
 
-    fun addItem(item: MenuData) {
-        mItems.add(item)
+    fun addItem(mitem: MenuData) {
+        mItems.add(mitem)
+        notifyDataSetChanged()
+    }
+
+    fun addItemList(list: List<MenuData>) {
+        for (mitem in list) {
+            addItem(mitem)
+        }
+    }
+
+    fun removeAllItems() {
+        mItems.clear()
         notifyDataSetChanged()
     }
 
