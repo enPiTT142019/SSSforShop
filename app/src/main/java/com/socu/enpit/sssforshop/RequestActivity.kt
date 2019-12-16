@@ -52,6 +52,11 @@ class RequestActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             }
+            R.id.menu_reload -> {
+                adapter.removeAllItems()
+                val requestDataList = CloudDataManager.getRequestDataList()
+                for (request in requestDataList) adapter.addItem(request)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
