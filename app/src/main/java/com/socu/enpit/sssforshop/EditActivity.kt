@@ -62,13 +62,8 @@ class EditActivity : AppCompatActivity() {
         recyclerViewMenu.layoutManager = LinearLayoutManager(this)
         recyclerViewMenu.adapter = madapter
 
-        nadapter.removeAllItems()
-        val nlist = CloudDataManager.getNewsDataList()
-        nadapter.addItemList(nlist)
-
-        madapter.removeAllItems()
-        val mlist = CloudDataManager.getMenuDataList()
-        madapter.addItemList(mlist)
+        loadNewsDataList()
+        loadMenuDataList()
 
         requestButton.setOnClickListener {
             val intent = Intent(this, RequestActivity::class.java)
@@ -96,6 +91,18 @@ class EditActivity : AppCompatActivity() {
                 CloudDataManager.addMenuData(item)
             }
         }
+    }
+
+    private fun loadNewsDataList() {
+        nadapter.removeAllItems()
+        val nlist = CloudDataManager.getNewsDataList()
+        nadapter.addItemList(nlist)
+    }
+
+    private fun loadMenuDataList() {
+        madapter.removeAllItems()
+        val mlist = CloudDataManager.getMenuDataList()
+        madapter.addItemList(mlist)
     }
 
     //画像入れ替え
@@ -168,6 +175,10 @@ class EditActivity : AppCompatActivity() {
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
+            }
+            R.id.menu_reload -> {
+                loadNewsDataList()
+                loadMenuDataList()
             }
         }
         return super.onOptionsItemSelected(item)
