@@ -11,10 +11,19 @@
         android:id="@+id/returnEditScreenButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="編集"
+        android:background="@drawable/request_backbutton_style"
+        android:text="戻る"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/upDateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="更新" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
