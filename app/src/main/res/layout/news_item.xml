@@ -33,15 +33,6 @@
             android:text="TextView"
             android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/deleteButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#BBBBBB"
-            android:text="Delete"
-            android:textSize="25sp" />
-
         <TextView
             android:id="@+id/Line"
             android:layout_width="match_parent"
