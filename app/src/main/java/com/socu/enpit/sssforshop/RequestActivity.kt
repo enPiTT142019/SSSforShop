@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_request.*
 
@@ -21,16 +22,16 @@ class RequestActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        returnEditScreenButton.setOnClickListener {
-            // debug
-            val item = RequestData("タイトル", "コンテンツ", "日付")
-            adapter.addItem(item)
-        }
+        returnEditScreenButton.setOnClickListener {finish()}
 
-//        val list = CloudDataManager.getRequestDataList()
-//        for(item in list) {
-//            adapter.addItem((item))
-//        }
+        upDateButton.setOnClickListener{
+            adapter.removeAllItems()
+            val list = CloudDataManager.getRequestDataList()
+            for (item in list) adapter.addItem((item))
+
+            Toast.makeText(this, "更新しました。", Toast.LENGTH_SHORT).show()
+
+        }
     }
 
     // メニューを表示させる処理
